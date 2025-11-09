@@ -7,17 +7,19 @@ import Products from './pages/Products';
 import Cart from './pages/Cart';
 import Login from './pages/Login';
 import Checkout from './pages/Checkout';
+import ProductDetails from './pages/ProductDetails';
 
 function App() {
   return (
     <AuthProvider>
       <CartProvider>
         <Router>
-          <div className="min-h-screen bg-gray-50">
+          <div className="min-h-screen bg-transparent">
             <Navbar />
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/products" element={<Products />} />
+              <Route path="/products/:productId" element={<ProductDetails />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/login" element={<Login />} />
               <Route path="/checkout" element={<Checkout />} />
