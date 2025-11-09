@@ -30,78 +30,102 @@ const Products = () => {
     });
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">All Products</h1>
-
-        {/* Filters and Search */}
-        <div className="bg-white p-4 rounded-lg shadow-md mb-8">
-          {/* Search Bar */}
-          <div className="mb-4">
-            <input
-              type="text"
-              placeholder="Search products..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-
-          <div className="flex flex-col sm:flex-row gap-4">
-            {/* Category Filter */}
-            <div className="flex-1">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Category
-              </label>
-              <div className="flex flex-wrap gap-2">
-                {categories.map(category => (
-                  <button
-                    key={category}
-                    onClick={() => setSelectedCategory(category)}
-                    className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                      selectedCategory === category
-                        ? 'bg-blue-600 text-white'
-                        : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                    }`}
-                  >
-                    {category}
-                  </button>
-                ))}
+    <div className="min-h-screen">
+      <section className="border-b border-white/60 bg-white/70">
+        <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+            <div className="space-y-4">
+              <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+                Discover our catalogue
+              </h1>
+              <p className="max-w-2xl text-slate-600">
+                Browse through a curated selection of lifestyle essentials tailored for every moment. Refine your search with categories, filters, and smart sorting.
+              </p>
+            </div>
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+              <div className="flex items-center gap-3 rounded-full border border-slate-200 bg-white/80 px-4 py-2 shadow-sm">
+                <svg
+                  className="h-5 w-5 text-slate-400"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="m21 21-4.35-4.35" />
+                  <circle cx="11" cy="11" r="7" />
+                </svg>
+                <input
+                  type="search"
+                  placeholder="Search products..."
+                  value={searchTerm}
+                  onChange={event => setSearchTerm(event.target.value)}
+                  className="w-full border-none bg-transparent text-sm text-slate-600 placeholder:text-slate-400 focus:outline-none"
+                />
+              </div>
+              <div className="rounded-full border border-slate-200 bg-white/80 px-4 py-2 shadow-sm">
+                <label className="mr-3 text-sm font-medium text-slate-600">Sort by</label>
+                <select
+                  value={sortBy}
+                  onChange={event => setSortBy(event.target.value)}
+                  className="rounded-full border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-400/60"
+                >
+                  <option value="name">Featured</option>
+                  <option value="price-low">Price: Low to High</option>
+                  <option value="price-high">Price: High to Low</option>
+                  <option value="rating">Customer Rating</option>
+                </select>
               </div>
             </div>
+          </div>
 
-            {/* Sort By */}
-            <div className="sm:w-48">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Sort By
-              </label>
-              <select
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          <div className="mt-10 flex flex-wrap gap-3">
+            {categories.map(category => (
+              <button
+                key={category}
+                onClick={() => setSelectedCategory(category)}
+                className={`rounded-full px-5 py-2 text-sm font-semibold transition-all ${
+                  selectedCategory === category
+                    ? 'bg-slate-900 text-white shadow-lg'
+                    : 'bg-white/80 text-slate-600 shadow-sm hover:bg-slate-100'
+                }`}
               >
-                <option value="name">Name</option>
-                <option value="price-low">Price: Low to High</option>
-                <option value="price-high">Price: High to Low</option>
-                <option value="rating">Rating</option>
-              </select>
-            </div>
+                {category}
+              </button>
+            ))}
           </div>
         </div>
+      </section>
 
-        {/* Products Grid */}
+      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         {filteredProducts.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {filteredProducts.map(product => (
               <ProductCard key={product.id} product={product} />
             ))}
           </div>
         ) : (
-          <div className="text-center py-12">
-            <p className="text-xl text-gray-600">No products found</p>
+          <div className="flex flex-col items-center justify-center rounded-3xl border border-dashed border-slate-300 bg-white/70 py-20 text-center shadow-inner">
+            <svg
+              className="h-16 w-16 text-slate-300"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M21 21H3v-2a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z" />
+              <circle cx="12" cy="7" r="4" />
+            </svg>
+            <p className="mt-6 text-xl font-semibold text-slate-900">No products found</p>
+            <p className="mt-2 max-w-md text-sm text-slate-500">
+              Try adjusting your filters or searching for a different item to explore our catalogue.
+            </p>
           </div>
         )}
-      </div>
+      </section>
     </div>
   );
 };
