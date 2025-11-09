@@ -7,6 +7,7 @@ const ProductCard = ({ product }) => {
 
   return (
     <div className="group relative overflow-hidden rounded-3xl border border-slate-200/60 bg-white/80 shadow-lg shadow-slate-200/40 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+
       <Link
         to={`/products/${product.id}`}
         className="relative flex aspect-[4/3] items-center justify-center overflow-hidden bg-gradient-to-br from-slate-100 via-white to-indigo-50"
@@ -30,6 +31,7 @@ const ProductCard = ({ product }) => {
           </svg>
           {product.rating}
         </div>
+
       </Link>
 
       <div className="flex flex-col gap-4 px-5 pb-6 pt-5">
