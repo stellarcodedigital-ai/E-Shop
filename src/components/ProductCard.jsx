@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 
 const ProductCard = ({ product }) => {
@@ -6,7 +7,11 @@ const ProductCard = ({ product }) => {
 
   return (
     <div className="group relative overflow-hidden rounded-3xl border border-slate-200/60 bg-white/80 shadow-lg shadow-slate-200/40 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
-      <div className="relative flex aspect-[4/3] items-center justify-center overflow-hidden bg-gradient-to-br from-slate-100 via-white to-indigo-50">
+
+      <Link
+        to={`/products/${product.id}`}
+        className="relative flex aspect-[4/3] items-center justify-center overflow-hidden bg-gradient-to-br from-slate-100 via-white to-indigo-50"
+      >
         <img
           src={product.image}
           alt={product.name}
@@ -26,13 +31,14 @@ const ProductCard = ({ product }) => {
           </svg>
           {product.rating}
         </div>
-      </div>
+
+      </Link>
 
       <div className="flex flex-col gap-4 px-5 pb-6 pt-5">
         <div className="space-y-2">
-          <h3 className="line-clamp-2 text-lg font-semibold text-slate-900">
-            {product.name}
-          </h3>
+          <Link to={`/products/${product.id}`} className="block text-lg font-semibold text-slate-900 transition-colors hover:text-indigo-600">
+            <h3 className="line-clamp-2">{product.name}</h3>
+          </Link>
           <p className="line-clamp-2 text-sm text-slate-600">
             {product.description}
           </p>
